@@ -8,7 +8,8 @@ while True:
     print("\nMenu")
     print("1. Add Student")
     print("2. View Students")
-    print("3. Exit")
+    print("3. Search Student")
+    print("4. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -26,6 +27,14 @@ while True:
                 print(i, student)
 
     elif choice == "3":
+        search = input("Enter student name to search: ")
+
+        if search in students:
+            print(search, "found!")
+        else:
+            print(search, "not found.")
+
+    elif choice == "4":
         print("Thank you!")
         break
 
