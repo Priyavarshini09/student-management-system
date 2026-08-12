@@ -1,4 +1,15 @@
+import csv
+
 students = []
+
+try:
+    with open("students.csv", "r") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row:
+                students.append(row[0])
+except FileNotFoundError:
+    pass
 
 print("===================================")
 print("   Student Management System")
@@ -18,6 +29,9 @@ while True:
     if choice == "1":
         name = input("Enter student name: ")
         students.append(name)
+        with open("students.csv", "a", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow([name])
         print("Student added successfully!")
 
     elif choice == "2":
