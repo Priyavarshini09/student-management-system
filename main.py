@@ -19,6 +19,7 @@ print("===================================")
 print("   Student Management System")
 print("===================================")
 
+
 while True:
 
     print("\nMenu")
@@ -38,25 +39,40 @@ while True:
         student_id = input("Enter student ID: ")
         name = input("Enter student name: ")
         age = input("Enter age: ")
-        marks = input("Enter marks: ")
 
-        if int(marks) >= 90:
+        while True:
+            try:
+                marks = float(input("Enter marks (0-100): "))
+
+                if 0 <= marks <= 100:
+                    break
+
+                print("Marks must be between 0 and 100.")
+
+            except ValueError:
+                print("Please enter a valid number.")
+
+
+        if marks >= 90:
             grade = "A"
-        elif int(marks) >= 75:
+        elif marks >= 75:
             grade = "B"
-        elif int(marks) >= 60:
+        elif marks >= 60:
             grade = "C"
         else:
             grade = "D"
 
+
         student = [student_id, name, age, marks, grade]
         students.append(student)
+
 
         with open("students.csv", "w", newline="") as file:
             writer = csv.writer(file)
 
             for student in students:
                 writer.writerow(student)
+
 
         print("Student added successfully!")
         print("Grade:", grade)
@@ -66,12 +82,15 @@ while True:
     elif choice == "2":
 
         if len(students) == 0:
+
             print("No students found.")
 
         else:
+
             print("\nStudent List")
 
             for student in students:
+
                 print(
                     "ID:", student[0],
                     "| Name:", student[1],
@@ -101,7 +120,9 @@ while True:
 
                 found = True
 
+
         if not found:
+
             print("Student not found.")
 
 
@@ -120,9 +141,11 @@ while True:
                 found = True
                 break
 
+
         if found:
 
             with open("students.csv", "w", newline="") as file:
+
                 writer = csv.writer(file)
 
                 for student in students:
@@ -131,6 +154,7 @@ while True:
             print("Student deleted successfully!")
 
         else:
+
             print("Student not found.")
 
 
@@ -147,16 +171,38 @@ while True:
 
                 new_name = input("Enter new student name: ")
                 new_age = input("Enter new age: ")
-                new_marks = input("Enter new marks: ")
 
-                if int(new_marks) >= 90:
+
+                while True:
+
+                    try:
+
+                        new_marks = float(
+                            input("Enter new marks (0-100): ")
+                        )
+
+                        if 0 <= new_marks <= 100:
+                            break
+
+                        print("Marks must be between 0 and 100.")
+
+                    except ValueError:
+
+                        print("Please enter a valid number.")
+
+
+                if new_marks >= 90:
                     new_grade = "A"
-                elif int(new_marks) >= 75:
+
+                elif new_marks >= 75:
                     new_grade = "B"
-                elif int(new_marks) >= 60:
+
+                elif new_marks >= 60:
                     new_grade = "C"
+
                 else:
                     new_grade = "D"
+
 
                 student[1] = new_name
                 student[2] = new_age
@@ -164,11 +210,14 @@ while True:
                 student[4] = new_grade
 
                 found = True
+
                 break
+
 
         if found:
 
             with open("students.csv", "w", newline="") as file:
+
                 writer = csv.writer(file)
 
                 for student in students:
@@ -177,6 +226,7 @@ while True:
             print("Student updated successfully!")
 
         else:
+
             print("Student not found.")
 
 
