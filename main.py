@@ -29,9 +29,10 @@ while True:
     if choice == "1":
         name = input("Enter student name: ")
         students.append(name)
-        with open("students.csv", "a", newline="") as file:
+        with open("students.csv", "w", newline="") as file:
             writer = csv.writer(file)
-            writer.writerow([name])
+            for student in students:
+                writer.writerow([student])
         print("Student added successfully!")
 
     elif choice == "2":
@@ -53,6 +54,10 @@ while True:
         delete = input("Enter student name to delete: ")
         if delete in students:
             students.remove(delete)
+            with open("students.csv", "w", newline="") as file:
+                writer = csv.writer(file)
+                for student in students:
+                    writer.writerow([student])
             print(delete, "deleted successfully!")
         else:
             print(delete, "not found.")
@@ -64,6 +69,12 @@ while True:
             new_name = input("Enter new student name: ")
             index = students.index(old_name)
             students[index] = new_name
+
+            with open("students.csv", "w", newline="") as file:
+                writer = csv.writer(file)
+                for student in students:
+                    writer.writerow([student])
+
             print("Student updated successfully!")
         else:
             print("Student not found.")
